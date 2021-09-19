@@ -1,0 +1,343 @@
+openapi: 3.0.0
+info:
+ title: API para cadastro de cadastro de partidos políticos e seus associados
+ description: API para realizar o cadastro de partidos políticos e seus associados.
+ version: 0.0.1
+servers:
+- url: http://localhost:8080
+  description: API de testes
+paths:
+  /associados:
+    get:
+      summary: Filtra associados por cargo politico
+      parameters:
+        - in: query
+          name: cargoPolitico
+          schema:
+            type: string
+          description: Filtra associados por cargo politico
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+             schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  cargoPolitico:
+                    type: string
+                  dataNascimento:
+                    type: string
+                  sexo:
+                    type: string
+                  
+  /associados/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: number
+      required: true
+    get:
+      summary: Recupera um associado pelo id.
+     
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+             schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  cargoPolitico:
+                    type: string
+                  dataNascimento:
+                    type: string
+                  sexo:
+                    type: string
+        404:
+          description: Partido não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      summary: Deleta associado pelo id.
+      responses:
+        '204':
+          description: Deleted
+        '404':
+          description: id not found
+        '401':
+          description: Unauthorized          
+    put:
+      summary: Altera um associado baseado no id
+      requestBody:
+        content:
+          apllication/json:
+            schema:
+              type: object
+              properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  cargoPolitico:
+                    type: string
+                  dataNascimento:
+                    type: string
+                  sexo:
+                    type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            apllication/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  cargoPolitico:
+                    type: string
+                  dataNascimento:
+                    type: string
+                  sexo:
+                    type: string
+    post:
+      summary: Cadastra um novo associado
+      requestBody:
+        content:
+          apllication/json:
+            schema:
+              type: object
+              properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  cargoPolitico:
+                    type: string
+                  dataNascimento:
+                    type: string
+                  sexo:
+                    type: string
+                
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            apllication/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  cargoPolitico:
+                    type: string
+                  dataNascimento:
+                    type: string
+                  sexo:
+                    type: string
+                  
+  /associados/partidos:
+    post:
+      summary: Vincula um partido a um associado
+      requestBody:
+        content:
+          apllication/json:
+            schema:
+              type: object
+              properties:
+                  idAssociado:
+                    type: number
+                  idPartido:
+                    type: number
+                
+                
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            apllication/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  cargoPolitico:
+                    type: string
+                  dataNascimento:
+                    type: string
+                  sexo:
+                    type: string       
+                  partido:
+                    type: number
+                    
+                    
+  /partidos:
+    get:
+      summary: Filtra partidos por ideologia
+      parameters:
+        - in: query
+          name: ideologia
+          schema:
+            type: string
+          description: Filtra partidos por ideologia
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+             schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  sigla:
+                    type: string
+                  ideologia:
+                    type: string
+                  dataFundacao:
+                    type: string
+                  
+  /partidos/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: number
+      required: true
+    get:
+      summary: Recupera um partido pelo id.
+     
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+             schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  sigla:
+                    type: string
+                  ideologia:
+                    type: string
+                  dataFundacao:
+                    type: string
+        404:
+          description: partido não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      summary: Deleta um partido pelo id.
+      responses:
+        '204':
+          description: Deleted
+        '404':
+          description: id not found
+        '401':
+          description: Unauthorized          
+    put:
+      summary: Altera um partido baseado no id
+      requestBody:
+        content:
+          apllication/json:
+            schema:
+              type: object
+              properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  sigla:
+                    type: string
+                  ideologia:
+                    type: string
+                  dataFundacao:
+                    type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            apllication/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  sigla:
+                    type: string
+                  ideologia:
+                    type: string
+                  dataFundacao:
+                    type: string
+    post:
+      summary: Cadastra um novo partido
+      requestBody:
+        content:
+          apllication/json:
+            schema:
+              type: object
+              properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  sigla:
+                    type: string
+                  ideologia:
+                    type: string
+                  dataFundacao:
+                    type: string
+                
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            apllication/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  nome:
+                    type: string
+                  sigla:
+                    type: string
+                  ideologia:
+                    type: string
+                  dataFundacao:
+                    type: string
+                  
+  
